@@ -29,11 +29,11 @@ body {
 
 .header {
     position: fixed;
-    top: 40%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 75vw;
-    max-height: 25vh;
+    white-space: nowrap;
     overflow-x: auto;
 }
 
