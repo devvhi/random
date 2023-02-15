@@ -1,4 +1,4 @@
-const characters = [
+const data = [
     [
         "A",
         "B",
@@ -82,34 +82,54 @@ const characters = [
     ]
 ]
 
-const passwordElement = document.querySelector("#password")
-
-const lengthElement = document.querySelector("#length")
+const output = document.querySelector("#password")
+const characters = document.querySelector("#length")
+const upperCheck = document.querySelector("#uppercase")
+const lowerCheck = document.querySelector("#lowercase")
+const numbersCheck = document.querySelector("#numbers")
+const symbolsCheck = document.querySelector("#symbols")
 
 function observe() {
-    let max = lengthElement.max
-    let min = lengthElement.min
-    if (parseInt(lengthElement.value) > max) {
-        lengthElement.value = max
+    let max = characters.max
+    let min = characters.min
+    if (parseInt(characters.value) > max) {
+        characters.value = max
     }
-    if (parseInt(lengthElement.value) < min) {
-        lengthElement.value = min
+    if (parseInt(characters.value) < min) {
+        characters.value = min
     }
 }
 
 const generate = () => {
-    let password = ""
-    for (let i = 0; i < lengthElement.value; i++) {
-        const parameter = characters[Math.floor(Math.random() * (characters.length - 0))]
-        password += parameter[Math.floor(Math.random() * (parameter.length - 0))]
+    let pool = []
+    if (upperCheck.checked) {
+        pool.push(data[0])
     }
-    passwordElement.innerText = password
+    if (lowerCheck.checked) {
+        pool.push(data[1])
+    }
+    if (numbersCheck.checked) {
+        pool.push(data[2])
+    }
+    if (symbolsCheck.checked) {
+        pool.push(data[3])
+    }
+    if (!upperCheck.checked && !lowerCheck.checked && !numbersCheck.checked && !symbolsCheck.checked) {
+        pool = data
+    }
+
+    let password = ""
+    for (let i = 0; i < characters.value; i++) {
+        const iteration = pool[Math.floor(Math.random() * (pool.length - 0))]
+        password += iteration[Math.floor(Math.random() * (iteration.length - 0))]
+    }
+    output.innerText = password
 }
 
 async function copy() {
-    if (passwordElement.innerText == "secure password") {
+    if (output.innerText == "secure password") {
         return
     }
-    await navigator.clipboard.writeText(passwordElement.innerText)
+    await navigator.clipboard.writeText(output.innerText)
     alert("copied")
 }
