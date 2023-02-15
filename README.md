@@ -1,3 +1,3 @@
 # securepassword
 
-## https://devvhi.github.io/random/
+## https://devvhi.github.io/securepassword/
