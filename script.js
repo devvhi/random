@@ -126,8 +126,10 @@ const generate = () => {
     output.innerText = password
 }
 
+generate()
+
 async function copy() {
-    if (output.innerText == "secure password") {
+    if (output.innerText == "") {
         return
     }
     await navigator.clipboard.writeText(output.innerText)
